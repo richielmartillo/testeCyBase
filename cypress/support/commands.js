@@ -24,9 +24,47 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('login', (email, senha) => { 
+Cypress.Commands.add('login', (email, senha, sucesso = true) => {
+    cy.visit('login.html')
     cy.get('#email').type(email)
     cy.get('#password').type(senha)
     cy.get('#login-btn').click()
-    cy.url().should('include', 'dashboard')
- })
+
+    if (sucesso) {
+        cy.url().should('include', 'dashboard')
+    }
+
+
+})
+
+Cypress.Commands.add('loginErro', (email, senha) => {
+    cy.visit('login.html')
+    cy.get('#email').type(email)
+    cy.get('#password').type(senha)
+    cy.get('#login-btn').click()
+})
+
+Cypress.Commands.add('loginApp', (email, senha) => {
+    cy.request({
+        method: 'POST',
+        url: 'api/login',
+        body: {
+            "email": email,
+            "password": senha
+        }
+    }).then((response) => {
+        expect(response.status).to.equal(200)
+        //Criar o estado da aplicação 
+        window.localStorage.setItem('authToken', response.body.token)
+
+        cy.visit('dashboard.html')
+        cy.get('h4').should('contain', 'Olá')
+    })
+})
+
+Cypress.Commands.add('loginToken', (token) => {
+    cy.visit('login.html')
+    window.localStorage.setItem('authToken', token)
+    cy.visit('dashboard.html')
+    cy.get('h4').should('contain', 'Olá')
+})
