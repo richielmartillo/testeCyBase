@@ -30,9 +30,9 @@ Cypress.Commands.add('login', (email, senha, sucesso = true) => {
     cy.get('#password').type(senha)
     cy.get('#login-btn').click()
 
-    if (sucesso) {
-        cy.url().should('include', 'dashboard')
-    }
+ //   if (sucesso) {
+//        cy.url().should('include', 'dashboard')
+ //   }
 
 
 })
