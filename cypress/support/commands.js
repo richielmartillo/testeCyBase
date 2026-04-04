@@ -30,11 +30,9 @@ Cypress.Commands.add('login', (email, senha, sucesso = true) => {
     cy.get('#password').type(senha)
     cy.get('#login-btn').click()
 
- //   if (sucesso) {
-//        cy.url().should('include', 'dashboard')
- //   }
-
-
+    if (sucesso) {
+        cy.url().should('include', 'dashboard')
+    }
 })
 
 Cypress.Commands.add('loginErro', (email, senha) => {
@@ -49,14 +47,13 @@ Cypress.Commands.add('loginApp', (email, senha) => {
         method: 'POST',
         url: 'api/login',
         body: {
-            "email": email,
-            "password": senha
-        }
+            email: email,
+            password: senha,
+        },
     }).then((response) => {
         expect(response.status).to.equal(200)
-        //Criar o estado da aplicação 
+        // Criar o estado da aplicação
         window.localStorage.setItem('authToken', response.body.token)
-
         cy.visit('dashboard.html')
         cy.get('h4').should('contain', 'Olá')
     })
