@@ -1,8 +1,10 @@
+//const cypress = require("cypress");
+
 describe('Funcionalidade: Administrar Reservas de livros', () => {
 
     beforeEach(() => {
-        //  cy.loginApp('usuario@teste.com', 'user123')
-        cy.loginToken("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ1c3VhcmlvQHRlc3RlLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3NzUzNDYyNzgsImV4cCI6MTc3NTM3NTA3OH0.NaZkQjOh1fG-yQqFZPlZxLGO221AmD2tRSKEIxMU2cM")
+        cy.loginApp(Cypress.env('USER_EMAIL'), Cypress.env('USER_SENHA'))
+        //  cy.loginToken(Cypress.env('TOKEN_COMUM'))
     });
 
     it('Deve exibir as reservas via intercept', () => {
