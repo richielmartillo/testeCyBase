@@ -65,3 +65,36 @@ Cypress.Commands.add('loginToken', (token) => {
     cy.visit('dashboard.html')
     cy.get('h4').should('contain', 'Olá')
 })
+
+Cypress.Commands.add('acessarCatalogo', () => {
+    cy.visit('index.html')
+    cy.contains('Explorar Catálogo')
+        .should('be.visible')
+        .click()
+
+    cy.url().should('include', 'catalog.html')
+})
+
+Cypress.Commands.add('acessarCesta', () => {
+    cy.visit('index.html')
+    cy.contains('Cesta')
+        .should('be.visible')
+        .click()
+
+    cy.url().should('include', 'basket.html')
+})
+
+Cypress.Commands.add('mockLivros', () => {
+    cy.fixture('livros').then((dadosLivros) => {
+        cy.intercept('GET', '/api/books*', {
+            statusCode: 200,
+            body: dadosLivros
+        }).as('listarLivros')
+    })
+})
+
+Cypress.Commands.add('acessarCatalogoComMock', () => {
+    cy.mockLivros()
+    cy.visit('catalog.html')
+    cy.wait('@listarLivros')
+})

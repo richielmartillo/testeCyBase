@@ -1,0 +1,31 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "1984",
+      "author": "George Orwell",
+      "category": "Ficção",
+      "description": "Distopia clássica sobre vigilância e controle.",
+      "cover_image": "1984.jpg",
+      "available_quantity": 5
+    },
+    {
+      "id": 2,
+      "title": "A Arte da Guerra",
+      "author": "Sun Tzu",
+      "category": "Estratégia",
+      "description": "Tratado militar clássico chinês.",
+      "cover_image": "arte-da-guerra.jpg",
+      "available_quantity": 3
+    },
+    {
+      "id": 3,
+      "title": "A Divina Comédia",
+      "author": "Dante Alighieri",
+      "category": "Poesia",
+      "description": "Jornada épica pelo Inferno, Purgatório e Paraíso.",
+      "cover_image": "divina-comedia.jpg",
+      "available_quantity": 4
+    }
+  ]
+}
