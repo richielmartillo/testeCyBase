@@ -6,6 +6,10 @@ describe('Funcionalidade: Administrar Reservas de livros', () => {
         cy.loginApp(Cypress.env('USER_EMAIL'), Cypress.env('USER_SENHA'))
     });
 
+    afterEach(() => {
+        cy.screenshot()
+    });
+
     it('Deve exibir as reservas via intercept', () => {
         cy.fixture('reservas').then((dadosReserva) => {
             cy.intercept('GET', 'api/reservations', {
